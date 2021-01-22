@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var count = 10
-    var tmp = 1
+    var randNumber = 1
     var timer = Timer()
     @IBOutlet weak var timerLabel: UILabel!
     
@@ -24,24 +24,24 @@ class ViewController: UIViewController {
 //        randBoxPosition()
         count = 10
         timer = Timer.scheduledTimer(timeInterval:  1, target: self, selector: #selector(timerFunction), userInfo: nil, repeats: true)
-        print(tmp)
     }
     
     @objc func timerFunction() {
         if count == 0 {
             timer.invalidate()
         }
+        randBoxPosition()
         timerLabel.text = "\(count)s"
-        
+        print(randNumber)
         count -= 1
     }
     
     func randBoxPosition() {
         var num = Int.random(in: 1...9)
-        if tmp == num {
+        if randNumber == num {
             num = Int.random(in: 1...9)
         }
-        tmp = num
+        randNumber = num
     }
 }
 
