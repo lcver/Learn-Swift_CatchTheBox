@@ -12,9 +12,27 @@ class ViewController: UIViewController {
     var count = 10
     var randNumber = 1
     var timer = Timer()
+    @IBOutlet weak var a: UIView!
+    @IBOutlet weak var b: UIView!
+    @IBOutlet weak var c: UIView!
+    @IBOutlet weak var d: UIView!
+    @IBOutlet weak var e: UIView!
+    @IBOutlet weak var f: UIView!
+    @IBOutlet weak var g: UIView!
+    @IBOutlet weak var h: UIView!
+    @IBOutlet weak var i: UIView!
+    
+    
     @IBOutlet weak var timerLabel: UILabel!
     
     override func viewDidLoad() {
+        let position = [a,b,c,d,e,f,g,h,i]
+        
+        for item in position {
+            if item != e {
+                item?.isHidden = true
+            }
+        }
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
@@ -37,9 +55,9 @@ class ViewController: UIViewController {
     }
     
     func randBoxPosition() {
-        var num = Int.random(in: 1...9)
+        var num = Int.random(in: 0...8)
         if randNumber == num {
-            num = Int.random(in: 1...9)
+            num = Int.random(in: 0...8)
         }
         randNumber = num
     }
