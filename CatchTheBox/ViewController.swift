@@ -9,9 +9,11 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var count = 10
     var randNumber = 1
     var timer = Timer()
+    var TimerCount: Int!
+    
+    var count: Int!
     var delay = true
     @IBOutlet weak var a: UIView!
     @IBOutlet weak var b: UIView!
@@ -40,24 +42,25 @@ class ViewController: UIViewController {
 
     @IBAction func randNow(_ sender: Any) {
 //        randBoxPosition()
-        count = 10
+        TimerCount = 10
+        count = TimerCount * 2
         timer = Timer.scheduledTimer(timeInterval:  0.5, target: self, selector: #selector(timerFunction), userInfo: nil, repeats: true)
         
     }
     
     @objc func timerFunction() {
-        if count == 0 {
+        if TimerCount == 0 {
             timer.invalidate()
         }
         
         randBoxPosition()
         visibilityBox(indexPath: randNumber)
         
-        timerLabel.text = "\(count)s"
+        timerLabel.text = "\(String(TimerCount))s"
         print(randNumber)
         
         if delay == false {
-            count -= 1
+            TimerCount -= 1
         }
         
         if count % 2 == 0 {
@@ -65,6 +68,7 @@ class ViewController: UIViewController {
         } else {
             delay = true
         }
+        count -= 1
     }
     
     func visibilityBox(indexPath: Int) {
