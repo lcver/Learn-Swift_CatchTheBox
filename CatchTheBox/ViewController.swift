@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     var randNumber = 1
     var timer = Timer()
     var TimerCount: Int!
+    var scoreNow: Int!
     
     var count: Int!
     var delay = true
@@ -30,10 +31,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        a.isUserInteractionEnabled = true
-        
-//        a.addGestureRecognizer(gestureRecognizer)
-        
         let position = [a,b,c,d,e,f,g,h,i]
         
         for item in position {
@@ -47,10 +44,11 @@ class ViewController: UIViewController {
 
     @IBAction func randNow(_ sender: Any) {
 //        randBoxPosition()
-        TimerCount = 10
-        count = TimerCount * 2
-        timer = Timer.scheduledTimer(timeInterval:  0.5, target: self, selector: #selector(timerFunction), userInfo: nil, repeats: true)
-        
+        if TimerCount == 0 || TimerCount == nil {
+            TimerCount = 10
+            count = TimerCount * 2
+            timer = Timer.scheduledTimer(timeInterval:  0.5, target: self, selector: #selector(timerFunction), userInfo: nil, repeats: true)
+        }
     }
     
     @objc func countScore() {
@@ -66,7 +64,7 @@ class ViewController: UIViewController {
         visibilityBox(indexPath: randNumber)
         
         timerLabel.text = "\(String(TimerCount))s"
-//        print(randNumber)
+        print(randNumber)
         
         if delay == false {
             TimerCount -= 1
