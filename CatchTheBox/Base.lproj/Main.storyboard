@@ -162,6 +162,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="HighscoreLabel" destination="J6v-vD-pww" id="0ZD-SO-TdS"/>
                         <outlet property="ScoreLabel" destination="XOi-9S-Yb6" id="CuU-dT-jrH"/>
                         <outlet property="a" destination="LIq-IG-UCh" id="TdL-t6-TXs"/>
                         <outlet property="b" destination="kwF-qa-8iP" id="oB0-o4-D6D"/>

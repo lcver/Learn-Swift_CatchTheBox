@@ -9,11 +9,12 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var scoreNow = 0
     var randNumber = 1
     var timer = Timer()
     var TimerCount: Int!
-    var scoreNow = 0
     @IBOutlet weak var ScoreLabel: UILabel!
+    @IBOutlet weak var HighscoreLabel: UILabel!
     
     var count: Int!
     var delay = true
@@ -40,12 +41,16 @@ class ViewController: UIViewController {
                 item?.isHidden = true
             }
         }
+        
+        
     }
 
 
     @IBAction func randNow(_ sender: Any) {
 //        randBoxPosition()
         if TimerCount == 0 || TimerCount == nil {
+            scoreNow = 0
+            ScoreLabel.text = String(scoreNow)
             TimerCount = 10
             count = TimerCount * 2
             timer = Timer.scheduledTimer(timeInterval:  0.5, target: self, selector: #selector(timerFunction), userInfo: nil, repeats: true)
@@ -64,11 +69,22 @@ class ViewController: UIViewController {
             timer.invalidate()
         }
         
+        if let Highscore = UserDefaults.standard.object(forKey: "highScore") {
+            let score = Highscore as! Int
+            if  score < scoreNow {
+                UserDefaults.standard.set(scoreNow, forKey: "highScore")
+            }
+            
+            HighscoreLabel.text = "Highscore : \(Highscore)"
+        } else {
+            UserDefaults.standard.set(0, forKey: "highScore")
+        }
+        
         randBoxPosition()
         visibilityBox(indexPath: randNumber)
         
         timerLabel.text = "\(String(TimerCount))s"
-        print(randNumber)
+//        print(randNumber)
         
         if delay == false {
             TimerCount -= 1
