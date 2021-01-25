@@ -12,7 +12,8 @@ class ViewController: UIViewController {
     var randNumber = 1
     var timer = Timer()
     var TimerCount: Int!
-    var scoreNow: Int!
+    var scoreNow = 0
+    @IBOutlet weak var ScoreLabel: UILabel!
     
     var count: Int!
     var delay = true
@@ -52,7 +53,10 @@ class ViewController: UIViewController {
     }
     
     @objc func countScore() {
-        print("Tapped")
+        if TimerCount != 0 {
+            scoreNow += 1
+            ScoreLabel.text = String(scoreNow)
+        }
     }
     
     @objc func timerFunction() {
