@@ -29,14 +29,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+//        a.isUserInteractionEnabled = true
+        
+//        a.addGestureRecognizer(gestureRecognizer)
+        
         let position = [a,b,c,d,e,f,g,h,i]
         
         for item in position {
+            addGesture(item: item!)
             if item != e {
                 item?.isHidden = true
             }
         }
-        super.viewDidLoad()
     }
 
 
@@ -48,6 +53,10 @@ class ViewController: UIViewController {
         
     }
     
+    @objc func countScore() {
+        print("Tapped")
+    }
+    
     @objc func timerFunction() {
         if TimerCount == 0 {
             timer.invalidate()
@@ -57,7 +66,7 @@ class ViewController: UIViewController {
         visibilityBox(indexPath: randNumber)
         
         timerLabel.text = "\(String(TimerCount))s"
-        print(randNumber)
+//        print(randNumber)
         
         if delay == false {
             TimerCount -= 1
@@ -86,6 +95,12 @@ class ViewController: UIViewController {
             num = Int.random(in: 0...8)
         }
         randNumber = num
+    }
+    
+    func addGesture(item: UIView) {
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(countScore))
+        item.isUserInteractionEnabled = true
+        item.addGestureRecognizer(gestureRecognizer)
     }
 }
 
