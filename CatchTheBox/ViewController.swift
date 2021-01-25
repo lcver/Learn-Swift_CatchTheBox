@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     var count = 10
     var randNumber = 1
     var timer = Timer()
+    var delay = true
     @IBOutlet weak var a: UIView!
     @IBOutlet weak var b: UIView!
     @IBOutlet weak var c: UIView!
@@ -34,24 +35,45 @@ class ViewController: UIViewController {
             }
         }
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
 
     @IBAction func randNow(_ sender: Any) {
 //        randBoxPosition()
         count = 10
-        timer = Timer.scheduledTimer(timeInterval:  1, target: self, selector: #selector(timerFunction), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval:  0.5, target: self, selector: #selector(timerFunction), userInfo: nil, repeats: true)
+        
     }
     
     @objc func timerFunction() {
         if count == 0 {
             timer.invalidate()
         }
+        
         randBoxPosition()
+        visibilityBox(indexPath: randNumber)
+        
         timerLabel.text = "\(count)s"
         print(randNumber)
-        count -= 1
+        
+        if delay == false {
+            count -= 1
+        }
+        
+        if count % 2 == 0 {
+            delay = false
+        } else {
+            delay = true
+        }
+    }
+    
+    func visibilityBox(indexPath: Int) {
+        let position = [a,b,c,d,e,f,g,h,i]
+        
+        for item in position {
+            item?.isHidden = true
+        }
+        position[indexPath]?.isHidden = false
     }
     
     func randBoxPosition() {
